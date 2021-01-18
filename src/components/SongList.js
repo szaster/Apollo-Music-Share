@@ -81,6 +81,7 @@ function Song({ song }) {
             <Typography variant="body1" component="p" color="textSecondary">
               {artist}
             </Typography>
+
             <IconButton size="small" color="primary">
               <PlayArrow />
             </IconButton>
