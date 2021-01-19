@@ -6,6 +6,7 @@ import {
   IconButton,
   Typography,
   makeStyles,
+  CardActions,
 } from "@material-ui/core";
 import { PlayArrow, Save } from "@material-ui/icons";
 import React from "react";
@@ -81,14 +82,15 @@ function Song({ song }) {
             <Typography variant="body1" component="p" color="textSecondary">
               {artist}
             </Typography>
-
+          </CardContent>
+          <CardActions>
             <IconButton size="small" color="primary">
               <PlayArrow />
             </IconButton>
             <IconButton size="small" color="secondary">
               <Save />
             </IconButton>
-          </CardContent>
+          </CardActions>
         </div>
       </div>
     </Card>
