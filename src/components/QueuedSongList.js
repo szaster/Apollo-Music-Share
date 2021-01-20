@@ -1,9 +1,19 @@
-import { IconButton, Typography, Avatar, makeStyles } from "@material-ui/core";
+import {
+  IconButton,
+  Typography,
+  Avatar,
+  makeStyles,
+  useMediaQuery,
+} from "@material-ui/core";
 
 import { Delete } from "@material-ui/icons";
 import React from "react";
 
 function QueuedSongList() {
+  const greaterThanMedium = useMediaQuery((theme) =>
+    theme.breakpoints.up("md")
+  );
+
   const song = {
     title: "bla",
     artist: "blabla",
@@ -12,14 +22,16 @@ function QueuedSongList() {
   };
 
   return (
-    <div style={{ margin: "10px, 0" }}>
-      <Typography color="textSecondary" variant="button">
-        QUEUE (5)
-      </Typography>
-      {Array.from({ length: 5 }, () => song).map((song, i) => (
-        <QueuedSong key={i} song={song} />
-      ))}
-    </div>
+    greaterThanMedium && (
+      <div style={{ margin: "10px, 0" }}>
+        <Typography color="textSecondary" variant="button">
+          QUEUE (5)
+        </Typography>
+        {Array.from({ length: 5 }, () => song).map((song, i) => (
+          <QueuedSong key={i} song={song} />
+        ))}
+      </div>
+    )
   );
 }
 
