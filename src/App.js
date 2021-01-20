@@ -3,20 +3,30 @@ import AddSong from "./components/AddSong";
 import Header from "./components/Header";
 import SongList from "./components/SongList";
 import SongPlayer from "./components/SongPlayer";
-import { Grid, useMediaQuery } from "@material-ui/core";
+import { Grid, useMediaQuery, Hidden } from "@material-ui/core";
 
 function App() {
   // matches returns false if screen is smaller than 600px
   // const matches = useMediaQuery("(min-width: 600px)");
+  const greaterThanSmall = useMediaQuery((theme) => theme.breakpoints.up("sm"));
   const greaterThanMedium = useMediaQuery((theme) =>
     theme.breakpoints.up("md")
   );
 
   return (
     <div>
-      <Header />
+      {/* show header for screens greater than small */}
+      {/* {greaterThanSmall && <Header />} */}
+      <Hidden only="xs">
+        <Header />
+      </Hidden>
       <Grid container spacing={3}>
-        <Grid style={{ paddingTop: 80 }} item xs={12} md={7}>
+        <Grid
+          style={{ paddingTop: greaterThanSmall ? 80 : 10 }}
+          item
+          xs={12}
+          md={7}
+        >
           <AddSong />
           <SongList />
         </Grid>
