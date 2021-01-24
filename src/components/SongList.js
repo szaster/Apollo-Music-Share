@@ -1,3 +1,5 @@
+import { useQuery } from "@apollo/react-hooks";
+import { GET_SONGS } from "../graphql/queries";
 import {
   Card,
   CardContent,
@@ -13,14 +15,16 @@ import React from "react";
 
 function SongList() {
   //creating loading spinner
-  let loading = false;
+  // let loading = false;
 
-  const song = {
-    title: "bla",
-    artist: "blabla",
-    thumbnail:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FxiXLtEi4Ui8%2Fmaxresdefault.jpg&f=1&nofb=1",
-  };
+  const { data, loading, error } = useQuery(GET_SONGS);
+
+  // const song = {
+  //   title: "Cozi Winter",
+  //   artist: "Lofi",
+  //   thumbnail:
+  //     "https://i.ytimg.com/vi/_tV5LEBDs7w/hq720.jpg?sqp=-oaymwEZCOgCEMoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBdRv2Ef4iSWCpZ_nqgPv2DestKqA",
+  // };
 
   if (loading) {
     return (
@@ -36,12 +40,17 @@ function SongList() {
       </div>
     );
   }
+  if (error) return <div>Error fetching songs!</div>;
 
   return (
     <div>
-      {Array.from({ length: 10 }, () => song).map((song, i) => (
-        <Song key={i} song={song} />
+      {data.songs.map((song) => (
+        <Song key={song.id} song={song} />
       ))}
+
+      {/* {Array.from({ length: 10 }, () => song).map((song, i) => (
+        <Song key={i} song={song} />
+      ))} */}
     </div>
   );
 }
